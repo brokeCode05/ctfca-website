@@ -1,0 +1,330 @@
+/* Design tokens — sourced from the approved CTFCA HTML prototype. */
+:root {
+  --bg: #f5f7fa;
+  --surface: #ffffff;
+  --ink: #14213d;
+  --muted: #556079;
+  --line: #d9e0ea;
+  --primary: #1d4e89;
+  --on-primary: #ffffff;
+  --accent: #d9731f;
+  --soft: #e6eef8;
+  --nav-bg: #1d4e89;
+  --nav-ink: #ffffff;
+  --note-bg: #fff2e0;
+  --note-ink: #6b3a05;
+
+  --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Public Sans", "Segoe UI", system-ui, sans-serif;
+
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0e1522;
+    --surface: #151e30;
+    --ink: #e7ecf5;
+    --muted: #9ba8c0;
+    --line: #28344d;
+    --primary: #8db8f0;
+    --on-primary: #0e1522;
+    --accent: #f09a52;
+    --soft: #1b2842;
+    --nav-bg: #1a2c4d;
+    --nav-ink: #e7ecf5;
+    --note-bg: #2a2114;
+    --note-ink: #f3cf9f;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0e1522;
+  --surface: #151e30;
+  --ink: #e7ecf5;
+  --muted: #9ba8c0;
+  --line: #28344d;
+  --primary: #8db8f0;
+  --on-primary: #0e1522;
+  --accent: #f09a52;
+  --soft: #1b2842;
+  --nav-bg: #1a2c4d;
+  --nav-ink: #e7ecf5;
+  --note-bg: #2a2114;
+  --note-ink: #f3cf9f;
+  color-scheme: dark;
+}
+
+/* Base reset and typography. */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px / 1.6 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+p {
+  margin: 0 0 0.9em;
+  max-width: 68ch;
+}
+
+a {
+  color: var(--primary);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+summary:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Layout shell. */
+.wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Header. */
+header.site {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 14px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  color: var(--ink);
+  min-width: 0;
+}
+
+.brand img {
+  width: 52px;
+  height: 52px;
+  flex: none;
+}
+
+.brand-text {
+  display: grid;
+  min-width: 0;
+}
+
+.brand-text strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2.6vw, 1.45rem);
+  line-height: 1.2;
+}
+
+.brand-text small {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+#menu-btn {
+  display: none;
+  font: inherit;
+  font-weight: 600;
+  background: var(--primary);
+  color: var(--on-primary);
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 14px;
+  cursor: pointer;
+}
+
+/* Main navigation. */
+nav.main {
+  background: var(--nav-bg);
+}
+
+nav.main ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav.main a {
+  display: block;
+  padding: 14px 20px;
+  color: var(--nav-ink);
+  text-decoration: none;
+  font-weight: 600;
+  border-bottom: 4px solid transparent;
+}
+
+nav.main a:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+nav.main a[aria-current="page"] {
+  border-bottom-color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Main content. */
+main {
+  padding-block: 28px 48px;
+  outline: none;
+}
+
+.content > * + * {
+  margin-top: 22px;
+}
+
+.lede {
+  color: var(--muted);
+  font-size: 1.05rem;
+  max-width: 62ch;
+}
+
+/* Footer. */
+footer.site {
+  background: var(--nav-bg);
+  color: var(--nav-ink);
+}
+
+footer.site .wrap {
+  padding-block: 26px;
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+footer.site a {
+  color: var(--nav-ink);
+}
+
+footer.site small {
+  opacity: 0.85;
+}
+
+footer.site ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 16px;
+}
+
+/* Small utility classes used by the foundation layout. */
+.eyebrow {
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 0.88rem;
+}
+
+.note {
+  background: var(--note-bg);
+  color: var(--note-ink);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 0.92rem;
+}
+
+@media (max-width: 760px) {
+  #menu-btn {
+    display: inline-block;
+  }
+
+  nav.main {
+    display: none;
+  }
+
+  nav.main.open {
+    display: block;
+  }
+
+  nav.main ul {
+    flex-direction: column;
+  }
+
+  nav.main a {
+    border-bottom: 0;
+    border-left: 4px solid transparent;
+  }
+
+  nav.main a[aria-current="page"] {
+    border-left-color: var(--accent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition: none !important;
+  }
+}
